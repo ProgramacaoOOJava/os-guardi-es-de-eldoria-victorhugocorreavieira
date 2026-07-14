@@ -1,0 +1,121 @@
+// ============================================================
+// Arquivo único com todas as classes do projeto
+// Herança, Classes Abstratas e Polimorfismo em Java
+// ============================================================
+
+
+// Superclasse abstrata que representa um personagem genérico
+abstract class Personagem {
+
+    // Atributos comuns a todos os personagens
+    String nome;
+    String classe;
+    int nivel;
+    int pontosDeVida;
+    double poderBase;
+
+    // Construtor da superclasse — inicializa os atributos comuns
+    public Personagem(String nome, String classe, int nivel, int pontosDeVida, double poderBase) {
+        this.nome = nome;
+        this.classe = classe;
+        this.nivel = nivel;
+        this.pontosDeVida = pontosDeVida;
+        this.poderBase = poderBase;
+    }
+
+    // Método abstrato — cada subclasse deve implementar sua própria habilidade especial
+    public abstract void usarHabilidadeEspecial();
+
+    // Método concreto reutilizável — exibe o status do personagem no console
+    public void exibirStatus() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Classe: " + classe);
+        System.out.println("Nível: " + nivel);
+        System.out.println("Pontos de Vida: " + pontosDeVida);
+        System.out.println("Poder Base: " + poderBase);
+        System.out.println();
+    }
+}
+
+
+// Subclasse que representa um Guerreiro — herda de Personagem
+class Guerreiro extends Personagem {
+
+    // Atributo específico do Guerreiro
+    String tipoDeArma;
+
+    // Construtor do Guerreiro — chama super() para inicializar os dados da superclasse
+    public Guerreiro(String nome, int nivel, int pontosDeVida, double poderBase, String tipoDeArma) {
+        super(nome, "Guerreiro", nivel, pontosDeVida, poderBase);
+        this.tipoDeArma = tipoDeArma;
+    }
+
+    // Sobrescrita do método abstrato com comportamento específico do Guerreiro
+    @Override
+    public void usarHabilidadeEspecial() {
+        System.out.println("Guerreiro " + nome + " ataca com " + tipoDeArma + "!");
+    }
+}
+
+
+// Subclasse que representa um Mago — herda de Personagem
+class Mago extends Personagem {
+
+    // Atributo específico do Mago
+    String feitico;
+
+    // Construtor do Mago — chama super() para inicializar os dados da superclasse
+    public Mago(String nome, int nivel, int pontosDeVida, double poderBase, String feitico) {
+        super(nome, "Mago", nivel, pontosDeVida, poderBase);
+        this.feitico = feitico;
+    }
+
+    // Sobrescrita do método abstrato com comportamento específico do Mago
+    @Override
+    public void usarHabilidadeEspecial() {
+        System.out.println("Mago " + nome + " lança " + feitico + "!");
+    }
+}
+
+
+// Subclasse que representa um Arqueiro — herda de Personagem
+class Arqueiro extends Personagem {
+
+    // Atributo específico do Arqueiro
+    String tipoDeFlecha;
+
+    // Construtor do Arqueiro — chama super() para inicializar os dados da superclasse
+    public Arqueiro(String nome, int nivel, int pontosDeVida, double poderBase, String tipoDeFlecha) {
+        super(nome, "Arqueiro", nivel, pontosDeVida, poderBase);
+        this.tipoDeFlecha = tipoDeFlecha;
+    }
+
+    // Sobrescrita do método abstrato com comportamento específico do Arqueiro
+    @Override
+    public void usarHabilidadeEspecial() {
+        System.out.println("Arqueiro " + nome + " dispara uma " + tipoDeFlecha + "!");
+    }
+}
+
+
+// Classe principal — ponto de entrada do programa
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Criando um array do tipo Personagem para armazenar diferentes subclasses
+        Personagem[] personagens = new Personagem[3];
+
+        // Instanciando cada personagem com seus atributos e habilidades próprias
+        personagens[0] = new Guerreiro("Arthus", 10, 120, 18.5, "Espada Flamejante");
+        personagens[1] = new Mago("Elenara", 8, 60, 25.0, "Bola de Fogo");
+        personagens[2] = new Arqueiro("Arthemis", 5, 80, 12.5, "Flecha Venenosa");
+
+        // Iterando sobre o array e exibindo status e habilidade de cada personagem
+        for (int i = 0; i < personagens.length; i++) {
+            personagens[i].exibirStatus();
+            personagens[i].usarHabilidadeEspecial();
+            System.out.println("---------------------------");
+        }
+    }
+}
